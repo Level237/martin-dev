@@ -1,14 +1,19 @@
-
-
-import { RouterProvider } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import AppRoutes from './routes/routes'
+import Navbar from './components/Navbar'
 import './App.css'
-import { routes } from './routes/routes'
 
 function App() {
-  
-
   return (
-    <RouterProvider router={routes} />
+    <Router>
+      <div className="app">
+        <Navbar />
+        <AnimatePresence mode="wait">
+          <AppRoutes />
+        </AnimatePresence>
+      </div>
+    </Router>
   )
 }
 
