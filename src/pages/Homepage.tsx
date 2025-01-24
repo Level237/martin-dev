@@ -1,8 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { FaGithub, FaCode, FaDatabase, FaReact, FaNodeJs,FaLaravel, FaHtml5, FaCss3 } from 'react-icons/fa';
+import { FaGithub, FaCode, FaDatabase, FaReact, FaNodeJs, FaLaravel, FaHtml5, FaCss3 } from 'react-icons/fa';
 import { SiJavascript, SiTypescript } from 'react-icons/si';
+import type { IconType } from 'react-icons';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -14,8 +16,36 @@ import hide from "../assets/hide.png"
 import sharaco from "../assets/sharaco.png"
 import enyfondation from "../assets/enyfondation.png"
 import goflyfits from "../assets/goflyfits.png"
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  tech: string[];
+}
 
-const FloatingIcon = ({ icon: Icon, className = "" }) => (
+interface Experience {
+  date: string;
+  title: string;
+  company: string;
+  description: string;
+}
+
+interface TimelineItemProps extends Experience {
+  index: number;
+}
+
+interface FloatingIconProps {
+  icon: IconType;
+  className?: string;
+}
+
+interface StatCardProps {
+  title: string;
+  value: string;
+  icon: IconType;
+}
+
+const FloatingIcon: React.FC<FloatingIconProps> = ({ icon: Icon, className = "" }) => (
   <motion.div
     className={`absolute text-gray-700/20 ${className}`}
     animate={{
@@ -32,7 +62,7 @@ const FloatingIcon = ({ icon: Icon, className = "" }) => (
   </motion.div>
 );
 
-const StatCard = ({ title, value, icon: Icon }) => (
+const StatCard: React.FC<StatCardProps> = ({ title, value, icon: Icon }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -50,7 +80,39 @@ const StatCard = ({ title, value, icon: Icon }) => (
   </motion.div>
 );
 
-const projects = [
+const TimelineItem: React.FC<TimelineItemProps> = ({ date, title, company, description, index }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -50 }}
+      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+      transition={{ duration: 0.5, delay: index * 0.2 }}
+      className="mb-8 relative"
+    >
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={isInView ? { scale: 1 } : { scale: 0 }}
+        transition={{ duration: 0.3, delay: index * 0.2 }}
+        className="absolute -left-10 w-4 h-4 bg-purple-500 rounded-full"
+      />
+      <motion.div
+        className="bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-xl border border-purple-500/20 backdrop-blur-sm"
+      >
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-semibold text-gray-200">{title}</h3>
+          <span className="text-purple-400 text-sm">{date}</span>
+        </div>
+        <p className="text-gray-400 mb-2">{company}</p>
+        <p className="text-gray-300">{description}</p>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const projects: Project[] = [
   {
     title: "FecaScrab",
     description: "Plateforme officielle de la fédération camerounaise de scrabble",
@@ -79,7 +141,7 @@ const projects = [
   {
     title: "Sharaco",
     description: "Generateur de devis pour les entreprises et les frelancers",
-    image: sharaco,
+    image:  sharaco,
     tech: ["Larave Api", "React Js", "Mysql"]
   },
   {
@@ -94,7 +156,33 @@ const projects = [
     image: goflyfits,
     tech: ["React", "TMDB API", "Redux"]
   },
+];
 
+const experiences: Experience[] = [
+  {
+    date: "Janvier 2024 - Présent",
+    title: "Développeur Full Stack",
+    company: "TechCorp Solutions",
+    description: "Développement d'applications web modernes avec React et Node.js. Mise en place d'architectures scalables et maintenance de bases de données."
+  },
+  {
+    date: "Juin 2023 - Décembre 2023",
+    title: "Développeur Frontend",
+    company: "DigitalWave Agency",
+    description: "Création d'interfaces utilisateur réactives et optimisation des performances des applications React."
+  },
+  {
+    date: "Janvier 2023 - Mai 2023",
+    title: "Développeur Laravel",
+    company: "WebSolutions Inc",
+    description: "Développement de solutions e-commerce et intégration de systèmes de paiement."
+  },
+  {
+    date: "Juillet 2022 - Décembre 2022",
+    title: "Développeur Full Stack Junior",
+    company: "StartupTech",
+    description: "Participation au développement de nouvelles fonctionnalités et maintenance d'applications existantes."
+  }
 ];
 
 const Homepage = () => {
@@ -193,24 +281,22 @@ const Homepage = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Mon Parcours</h2>
           <div className="max-w-3xl mx-auto">
-            <div className="relative pl-8 border-l-2 border-purple-500">
-              <div className="mb-12 relative">
-                <div className="absolute -left-10 w-4 h-4 bg-purple-500 rounded-full"></div>
-                <div className="bg-gray-800 mb-12 bg-opacity-50 p-6 rounded-lg shadow-xl border border-purple-500/20 backdrop-blur-sm">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-200">Développeur Full Stack</h3>
-                  <p className="text-gray-400 mb-2">Entreprise XYZ • 2023 - Présent</p>
-                  <p className="text-gray-300">Description de vos responsabilités et réalisations...</p>
-                </div>
-                <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-xl border border-purple-500/20 backdrop-blur-sm">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-200">Développeur Full Stack</h3>
-                  <p className="text-gray-400 mb-2">Entreprise XYZ • 2023 - Présent</p>
-                  <p className="text-gray-300">Description de vos responsabilités et réalisations...</p>
+            <div className="relative">
+              <div className=" pr-4 scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-800">
+                <div className="relative pl-8 border-l-2 border-purple-500">
+                  <AnimatePresence>
+                    {experiences.map((experience, index) => (
+                      <TimelineItem
+                        key={index}
+                        index={index}
+                        {...experience}
+                      />
+                    ))}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
-            
           </div>
-          
         </div>
       </section>
 
