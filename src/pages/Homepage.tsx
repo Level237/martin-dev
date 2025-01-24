@@ -153,7 +153,7 @@ const projects: Project[] = [
     title: "Goflyfits",
     description: "Application de location de vetements d'evenement",
     image: goflyfits,
-    tech: ["React", "TMDB API", "Redux"]
+    tech: ["Laravel", "Bootstrap", "Jquery"]
   },
 ];
 
@@ -241,6 +241,7 @@ const Homepage = () => {
                 value="4+" 
                 icon={FaDatabase}
               />
+              
             </div>
             
           </motion.div>
