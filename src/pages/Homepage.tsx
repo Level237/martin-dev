@@ -166,7 +166,7 @@ const projects: Project[] = [
     tech: ["Laravel Api", "React Js", "Typescript", "TailwindCSS","Redux"],
     year: "2025",
     status: "Hors ligne",
-    githubUrl: "https://github.com/yourusername/akevas",
+    githubUrl: "https://github.com/level237/akevas",
     liveUrl: "#",
     fullDescription: "Un marketplace permettant aux vendeurs de créer leur boutique en ligne et de vendre leurs produits."
   },
