@@ -66,9 +66,9 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, icon: Icon }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    className="bg-gray-800/40 backdrop-blur-sm p-4 rounded-xl border border-purple-500/20"
+    className="bg-gray-800/40 backdrop-blur-sm p-3 py-4 rounded-xl border border-purple-500/20"
   >
-    <div className="flex items-center gap-3">
+    <div className="flex items-center  gap-3">
       <div className="p-3 bg-purple-500/20 rounded-lg">
         <Icon className="text-purple-400" size={24} />
       </div>
@@ -205,18 +205,18 @@ const Homepage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
+            <h1 className="text-6xl max-sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
               Martin Developer
             </h1>
-            <p className="text-xl text-gray-300 mb-8">Développeur Web Full Stack Passionné</p>
+            <p className="text-xl max-sm:text-sm text-gray-300 mb-8">Frontend Developer</p>
             <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">React</span>
-              <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">TypeScript</span>
-              <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">Node.js</span>
+              <span className="px-4 py-2 max-sm:text-sm max-sm:px-4 max-sm:py-3 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">React</span>
+              <span className="px-4 py-2 max-sm:text-sm max-sm:px-4 max-sm:py-3 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">TypeScript</span>
+              <span className="px-4 py-2 max-sm:text-sm max-sm:px-4 max-sm:py-3 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">Node.js</span>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-sm:gap-4 max-w-3xl mx-auto">
               <StatCard 
                 title="Projets Réalisés" 
                 value="15+" 
