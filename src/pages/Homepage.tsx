@@ -242,7 +242,12 @@ const Homepage = () => {
                 icon={FaDatabase}
               />
             </div>
+            
           </motion.div>
+          
+          <div>
+            
+          </div>
         </div>
       </section>
 
