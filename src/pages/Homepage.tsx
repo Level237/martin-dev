@@ -15,6 +15,7 @@ import hide from "../assets/hide.png"
 import sharaco from "../assets/sharaco.png"
 import enyfondation from "../assets/enyfondation.png"
 import goflyfits from "../assets/goflyfits.png"
+import { Link } from 'react-router-dom';
 
 interface Project {
   title: string;
@@ -290,8 +291,9 @@ const Homepage = () => {
               <span className="px-4 py-2 max-sm:text-sm max-sm:px-4 max-sm:py-3 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">React</span>
               <span className="px-4 py-2 max-sm:text-sm max-sm:px-4 max-sm:py-3 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">TypeScript</span>
               <span className="px-4 py-2 max-sm:text-sm max-sm:px-4 max-sm:py-3 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">Node.js</span>
+            
             </div>
-
+            
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-sm:gap-4 max-w-3xl mx-auto">
               <StatCard 
@@ -315,17 +317,29 @@ const Homepage = () => {
               href="https://github.com/level237"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex  items-center gap-2 px-6 py-3 mt-20 text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:opacity-90 transition-opacity"
+              className="inline-flex max-sm:hidden  items-center gap-2 px-6 py-3 mt-20 text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:opacity-90 transition-opacity"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <FaGithub size={20} />
               Voir mon GitHub
             </motion.a>
+           
           </motion.div>
+          
         </div>
+        
       </section>
-
+        <div   className='max-sm:flex   max-sm:justify-center max-sm:-mt-44'>
+        <Link
+        
+              to="https://github.com/level237"
+             className="hidden max-sm:inline-flex z-50  mb-28 items-center gap-2 px-6 py-3 mt-20 text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:opacity-90 "
+            >
+            <FaGithub size={20} />
+            Voir mon GitHub
+            </Link>
+        </div>
       {/* Projects Section */}
       <section id="projects" className="py-20 bg-[#1A1A1A]/30 backdrop-blur-sm">
         <div className="container mx-auto px-4">
