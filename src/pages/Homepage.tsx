@@ -233,7 +233,7 @@ const Homepage = () => {
               />
               <StatCard 
                 title="Contributions Github" 
-                value="500+" 
+                value="5K+" 
                 icon={FaGithub}
               />
               <StatCard 
