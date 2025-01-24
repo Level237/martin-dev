@@ -7,16 +7,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
   z-index: 1000;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
 }
 
-.logo a {
+.logo {
   font-size: 1.5rem;
   font-weight: bold;
-  text-decoration: none;
-  color: #333;
 }
 
 .nav-links {
@@ -24,19 +21,25 @@
   gap: 2rem;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: #333;
+.nav-links button {
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.nav-links a:hover {
-  color: #007AFF;
+.nav-links button::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(to right, #a78bfa, #ec4899);
+  transition: width 0.3s ease;
 }
 
-.nav-links a.active {
-  color: #007AFF;
+.nav-links button:hover::after {
+  width: 100%;
 }
 
 @media (max-width: 768px) {

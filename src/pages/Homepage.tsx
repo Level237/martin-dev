@@ -59,31 +59,31 @@ const projects = [
 
 const Homepage = () => {
   return (
-    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-[#0F0F0F] via-[#1A1A1A] to-[#2D1F3D]">
       {/* Hero Section */}
-      <section className="min-h-screen  flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4">
+          <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
             Martin Developer
           </h1>
-          <p className="text-xl text-gray-600 mb-8">Développeur Web Full Stack Passionné</p>
+          <p className="text-xl text-gray-300 mb-8">Développeur Web Full Stack Passionné</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <span className="px-4 py-2 bg-white rounded-full shadow-md text-gray-700">React</span>
-            <span className="px-4 py-2 bg-white rounded-full shadow-md text-gray-700">TypeScript</span>
-            <span className="px-4 py-2 bg-white rounded-full shadow-md text-gray-700">Node.js</span>
+            <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">React</span>
+            <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">TypeScript</span>
+            <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">Node.js</span>
           </div>
         </motion.div>
       </section>
 
       {/* Projects Section */}
-      <section className="py-20 bg-white" id="projects">
+      <section id="projects" className="py-20 bg-[#1A1A1A]/30 backdrop-blur-sm" >
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Mes Projets</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Mes Projets</h2>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={30}
@@ -99,14 +99,14 @@ const Homepage = () => {
           >
             {projects.map((project, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="bg-gray-800 bg-opacity-50 rounded-xl shadow-xl overflow-hidden border border-purple-500/20 backdrop-blur-sm">
                   <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-gray-600 mb-4">{project.description}</p>
+                    <h3 className="text-xl font-semibold mb-2 text-gray-200">{project.title}</h3>
+                    <p className="text-gray-400 mb-4">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech, i) => (
-                        <span key={i} className="px-3 py-1 bg-gray-100 rounded-full text-sm">
+                        <span key={i} className="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">
                           {tech}
                         </span>
                       ))}
@@ -120,45 +120,55 @@ const Homepage = () => {
       </section>
 
       {/* Experience Section */}
-      <section className="py-20 bg-gray-50" id="experience">
+      <section id="experience" className="py-20 bg-[#1A1A1A]/20 backdrop-blur-sm">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Mon Parcours</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Mon Parcours</h2>
           <div className="max-w-3xl mx-auto">
-            <div className="relative pl-8 border-l-2 border-blue-500">
-              {/* Add your experience items here */}
+            <div className="relative pl-8 border-l-2 border-purple-500">
               <div className="mb-12 relative">
-                <div className="absolute -left-10 w-4 h-4 bg-blue-500 rounded-full"></div>
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-semibold mb-2">Développeur Full Stack</h3>
-                  <p className="text-gray-600 mb-2">Entreprise XYZ • 2023 - Présent</p>
-                  <p className="text-gray-700">Description de vos responsabilités et réalisations...</p>
+                <div className="absolute -left-10 w-4 h-4 bg-purple-500 rounded-full"></div>
+                <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-xl border border-purple-500/20 backdrop-blur-sm">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-200">Développeur Full Stack</h3>
+                  <p className="text-gray-400 mb-2">Entreprise XYZ • 2023 - Présent</p>
+                  <p className="text-gray-300">Description de vos responsabilités et réalisations...</p>
                 </div>
               </div>
-              {/* Add more experience items as needed */}
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-white" id="contact">
+      <section id="contact" className="py-20 bg-[#1A1A1A]/30 backdrop-blur-sm">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Me Contacter</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Me Contacter</h2>
           <div className="max-w-lg mx-auto">
             <form className="space-y-6">
               <div>
-                <label className="block text-gray-700 mb-2">Nom</label>
-                <input type="text" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <label className="block text-gray-300 mb-2">Nom</label>
+                <input 
+                  type="text" 
+                  className="w-full px-4 py-2 bg-gray-800 bg-opacity-50 border border-purple-500/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-200" 
+                />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">Email</label>
-                <input type="email" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <label className="block text-gray-300 mb-2">Email</label>
+                <input 
+                  type="email" 
+                  className="w-full px-4 py-2 bg-gray-800 bg-opacity-50 border border-purple-500/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-200" 
+                />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">Message</label>
-                <textarea rows={4} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                <label className="block text-gray-300 mb-2">Message</label>
+                <textarea 
+                  rows={4} 
+                  className="w-full px-4 py-2 bg-gray-800 bg-opacity-50 border border-purple-500/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-200"
+                ></textarea>
               </div>
-              <button type="submit" className="w-full py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+              <button 
+                type="submit" 
+                className="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg hover:opacity-90 transition-opacity"
+              >
                 Envoyer
               </button>
             </form>
@@ -167,13 +177,13 @@ const Homepage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-gray-900 text-gray-300 py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="mb-4"> 2025 Martin Developer. Tous droits réservés.</p>
           <div className="flex justify-center space-x-6">
-            <a href="#" className="hover:text-blue-400">LinkedIn</a>
-            <a href="#" className="hover:text-blue-400">GitHub</a>
-            <a href="#" className="hover:text-blue-400">Twitter</a>
+            <a href="#" className="hover:text-purple-400 transition-colors">LinkedIn</a>
+            <a href="#" className="hover:text-purple-400 transition-colors">GitHub</a>
+            <a href="#" className="hover:text-purple-400 transition-colors">Twitter</a>
           </div>
         </div>
       </footer>
