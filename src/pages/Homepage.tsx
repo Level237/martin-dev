@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { FaGithub, FaCode, FaDatabase, FaReact, FaNodeJs,FaLaravel, FaHtml5, FaCss3 } from 'react-icons/fa';
+import { SiJavascript, SiTypescript } from 'react-icons/si';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -12,6 +14,42 @@ import hide from "../assets/hide.png"
 import sharaco from "../assets/sharaco.png"
 import enyfondation from "../assets/enyfondation.png"
 import goflyfits from "../assets/goflyfits.png"
+
+const FloatingIcon = ({ icon: Icon, className = "" }) => (
+  <motion.div
+    className={`absolute text-gray-700/20 ${className}`}
+    animate={{
+      y: [0, -10, 0],
+      rotate: [-5, 5, -5],
+    }}
+    transition={{
+      duration: 5,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <Icon size={30} />
+  </motion.div>
+);
+
+const StatCard = ({ title, value, icon: Icon }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="bg-gray-800/40 backdrop-blur-sm p-4 rounded-xl border border-purple-500/20"
+  >
+    <div className="flex items-center gap-3">
+      <div className="p-3 bg-purple-500/20 rounded-lg">
+        <Icon className="text-purple-400" size={24} />
+      </div>
+      <div>
+        <p className="text-gray-400 text-sm">{title}</p>
+        <p className="text-2xl font-bold text-gray-200">{value}</p>
+      </div>
+    </div>
+  </motion.div>
+);
+
 const projects = [
   {
     title: "FecaScrab",
@@ -63,23 +101,52 @@ const Homepage = () => {
   return (
     <div className="min-h-screen overflow-hidden bg-gradient-to-br from-[#0F0F0F] via-[#1A1A1A] to-[#2D1F3D]">
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
-            Martin Developer
-          </h1>
-          <p className="text-xl text-gray-300 mb-8">Développeur Web Full Stack Passionné</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">React</span>
-            <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">TypeScript</span>
-            <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">Node.js</span>
-          </div>
-        </motion.div>
+      <section id="hero" className="min-h-screen mt-16 relative flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        {/* Floating Icons */}
+        <FloatingIcon icon={FaReact} className="top-1/4 left-1/4" />
+        <FloatingIcon icon={FaNodeJs} className="top-1/3 right-1/4" />
+        <FloatingIcon icon={SiJavascript} className="bottom-1/3 left-1/3" />
+        <FloatingIcon icon={SiTypescript} className="top-1/2 right-1/3" />
+        <FloatingIcon icon={FaHtml5} className="bottom-1/4 left-1/5" />
+        <FloatingIcon icon={FaCss3} className="top-1/3 right-1/5" />
+        <FloatingIcon icon={FaLaravel} className="bottom-13 right-1/2" />
+        <div className="container mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
+              Martin Developer
+            </h1>
+            <p className="text-xl text-gray-300 mb-8">Développeur Web Full Stack Passionné</p>
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">React</span>
+              <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">TypeScript</span>
+              <span className="px-4 py-2 bg-gray-800 bg-opacity-50 rounded-full shadow-lg text-gray-300 border border-purple-500/20">Node.js</span>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+              <StatCard 
+                title="Projets Réalisés" 
+                value="15+" 
+                icon={FaCode}
+              />
+              <StatCard 
+                title="Contributions Github" 
+                value="500+" 
+                icon={FaGithub}
+              />
+              <StatCard 
+                title="Technologies Maîtrisées" 
+                value="10+" 
+                icon={FaDatabase}
+              />
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Projects Section */}
