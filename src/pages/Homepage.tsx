@@ -1,13 +1,12 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/swiper-bundle.css'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { FaGithub, FaCode, FaDatabase, FaReact, FaNodeJs, FaLaravel, FaHtml5, FaCss3 } from 'react-icons/fa';
 import { SiJavascript, SiTypescript } from 'react-icons/si';
 import type { IconType } from 'react-icons';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+
 import '../styles/swiper.css';
 import fecascrab from "../assets/fecascrab.png"
 import akevas from "../assets/akevas.png"
@@ -99,11 +98,11 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ date, title, company, descr
         className="absolute -left-10 w-4 h-4 bg-purple-500 rounded-full"
       />
       <motion.div
-        className="bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-xl border border-purple-500/20 backdrop-blur-sm"
+        className="bg-gray-800 bg-opacity-50 p-6 max-sm:p-5 rounded-lg shadow-xl border border-purple-500/20 backdrop-blur-sm"
       >
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-semibold text-gray-200">{title}</h3>
-          <span className="text-purple-400 text-sm">{date}</span>
+          <h3 className="text-xl max-sm:text-lg font-semibold text-gray-200">{title}</h3>
+          <span className="text-purple-400   text-sm">{date}</span>
         </div>
         <p className="text-gray-400 mb-2">{company}</p>
         <p className="text-gray-300">{description}</p>
@@ -159,30 +158,40 @@ const projects: Project[] = [
 ];
 
 const experiences: Experience[] = [
+
+    {
+        date: "Novembre 2024 - à present",
+        title: "Développeur Frontend",
+        company: "ZEGUILD",
+        description: "Conception et maintenance des applications web pour les PME et les entreprises"
+      },
+      {
+        date: "Janvier 2024 - à present",
+        title: "Sofware Engineer",
+        company: "independant",
+        description: "Création des applications robustes et performantes avec des technologies frontend modernes"
+      },{
+        date: "Decembre 2024 - Janvier 2025",
+        title: "Responsable technique par interim",
+        company: "GECAM",
+        description: "Maintenance des materiels informatiques et logiciels de la Gecam"
+      },
+      {
+        date: "Janvier 2023 - Aout 2023",
+        title: "Développeur Laravel",
+        company: "K-SOFT",
+        description: "Création d'une Api de voyage et maintenance d'applications frontend et backend"
+      },
   {
-    date: "Janvier 2024 - Présent",
+    date: "Mars 2021 - Dec 2023",
     title: "Développeur Full Stack",
-    company: "TechCorp Solutions",
-    description: "Développement d'applications web modernes avec React et Node.js. Mise en place d'architectures scalables et maintenance de bases de données."
+    company: "Stillforce technologies",
+    description: "Developpeur Full Stack et Responsable des projets en equipe"
   },
-  {
-    date: "Juin 2023 - Décembre 2023",
-    title: "Développeur Frontend",
-    company: "DigitalWave Agency",
-    description: "Création d'interfaces utilisateur réactives et optimisation des performances des applications React."
-  },
-  {
-    date: "Janvier 2023 - Mai 2023",
-    title: "Développeur Laravel",
-    company: "WebSolutions Inc",
-    description: "Développement de solutions e-commerce et intégration de systèmes de paiement."
-  },
-  {
-    date: "Juillet 2022 - Décembre 2022",
-    title: "Développeur Full Stack Junior",
-    company: "StartupTech",
-    description: "Participation au développement de nouvelles fonctionnalités et maintenance d'applications existantes."
-  }
+  
+  
+  
+  
 ];
 
 const Homepage = () => {
@@ -191,12 +200,12 @@ const Homepage = () => {
       {/* Hero Section */}
       <section id="hero" className="min-h-screen mt-16 relative flex items-center justify-center px-4 sm:px-6 lg:px-8">
         {/* Floating Icons */}
-        <FloatingIcon icon={FaReact} className="top-1/4 left-1/4" />
-        <FloatingIcon icon={FaNodeJs} className="top-1/3 right-1/4" />
-        <FloatingIcon icon={SiJavascript} className="bottom-1/3 left-1/3" />
-        <FloatingIcon icon={SiTypescript} className="top-1/2 right-1/3" />
-        <FloatingIcon icon={FaHtml5} className="bottom-1/4 left-1/5" />
-        <FloatingIcon icon={FaCss3} className="top-1/3 right-1/5" />
+        <FloatingIcon icon={FaReact} className="top-1/4 max-sm:top-16 left-1/4" />
+        <FloatingIcon icon={FaNodeJs} className="top-1/3 max-sm:top-16 right-1/4" />
+        <FloatingIcon icon={SiJavascript} className="bottom-1/3 max-sm:bottom-28 max-sm:left-80 left-1/3" />
+        <FloatingIcon icon={SiTypescript} className="top-1/2 max-sm:bottom-16 max-sm:left-8 right-1/3" />
+        <FloatingIcon icon={FaHtml5} className="bottom-1/4 max-sm:bottom-1/2 left-1/5" />
+        <FloatingIcon icon={FaCss3} className="top-1/3  right-1/5" />
         <FloatingIcon icon={FaLaravel} className="bottom-13 right-1/2" />
         <div className="container mx-auto">
           <motion.div 
@@ -219,7 +228,7 @@ const Homepage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-sm:gap-4 max-w-3xl mx-auto">
               <StatCard 
                 title="Projets Réalisés" 
-                value="15+" 
+                value="50+" 
                 icon={FaCode}
               />
               <StatCard 
@@ -229,7 +238,7 @@ const Homepage = () => {
               />
               <StatCard 
                 title="Technologies Maîtrisées" 
-                value="10+" 
+                value="4+" 
                 icon={FaDatabase}
               />
             </div>
