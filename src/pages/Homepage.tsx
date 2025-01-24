@@ -1,5 +1,5 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/swiper-bundle.css'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -15,11 +15,17 @@ import hide from "../assets/hide.png"
 import sharaco from "../assets/sharaco.png"
 import enyfondation from "../assets/enyfondation.png"
 import goflyfits from "../assets/goflyfits.png"
+
 interface Project {
   title: string;
   description: string;
   image: string;
   tech: string[];
+  year: string;
+  status: "En ligne" | "En maintenance" | "Hors ligne";
+  githubUrl?: string;
+  liveUrl?: string;
+  fullDescription?: string;
 }
 
 interface Experience {
@@ -42,6 +48,12 @@ interface StatCardProps {
   title: string;
   value: string;
   icon: IconType;
+}
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
 }
 
 const FloatingIcon: React.FC<FloatingIconProps> = ({ icon: Icon, className = "" }) => (
@@ -111,90 +123,146 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ date, title, company, descr
   );
 };
 
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-gray-800 p-6 rounded-xl max-w-2xl w-full mx-4 shadow-2xl border border-purple-500/20"
+        onClick={e => e.stopPropagation()}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const projects: Project[] = [
   {
     title: "FecaScrab",
     description: "Plateforme officielle de la fédération camerounaise de scrabble",
     image: fecascrab,
-    tech: ["React Js", "Node.js", "Typescript"]
+    tech: ["React Js", "Node.js", "Typescript", "MongoDB", "Express", "Redux", "TailwindCSS"],
+    year: "2023",
+    status: "En ligne",
+    githubUrl: "https://github.com/yourusername/fecascrab",
+    liveUrl: "https://fecascrab.com",
+    fullDescription: "Une plateforme complète permettant aux joueurs de scrabble de participer à des tournois en ligne, suivre leurs statistiques et interagir avec la communauté."
   },
   {
     title: "Akevas",
     description: "Marketplace des boutiques en ligne",
     image: akevas,
-    tech: ["Laravel", "React Js", "Typescript"]
+    tech: ["Laravel", "React Js", "Typescript"],
+    year: "2022",
+    status: "En ligne",
+    githubUrl: "https://github.com/yourusername/akevas",
+    liveUrl: "https://akevas.com",
+    fullDescription: "Un marketplace permettant aux vendeurs de créer leur boutique en ligne et de vendre leurs produits."
   },
   {
     title: "Hide",
     description: "Social Network for hidden people",
     image: hide,
-    tech: ["Next Js", "React Js", "Mongo DB"]
+    tech: ["Next Js", "React Js", "Mongo DB"],
+    year: "2022",
+    status: "En ligne",
+    githubUrl: "https://github.com/yourusername/hide",
+    liveUrl: "https://hide.com",
+    fullDescription: "Un réseau social permettant aux personnes de se connecter et de partager leurs expériences."
   },
   {
     title: "Breteuil dentaire",
     description: "Site web vitrine d'un cabinet dentaire",
     image: breteuil,
-    tech: ["Laravel", "Bootstrap", "Jquery"]
+    tech: ["Laravel", "Bootstrap", "Jquery"],
+    year: "2021",
+    status: "En ligne",
+    githubUrl: "https://github.com/yourusername/breteuil-dentaire",
+    liveUrl: "https://breteuil-dentaire.com",
+    fullDescription: "Un site web vitrine pour un cabinet dentaire, permettant aux patients de consulter les informations et de prendre rendez-vous."
   },
-  
   {
     title: "Sharaco",
     description: "Generateur de devis pour les entreprises et les frelancers",
-    image:  sharaco,
-    tech: ["Larave Api", "React Js", "Mysql"]
+    image: sharaco,
+    tech: ["Larave Api", "React Js", "Mysql"],
+    year: "2021",
+    status: "En ligne",
+    githubUrl: "https://github.com/yourusername/sharaco",
+    liveUrl: "https://sharaco.com",
+    fullDescription: "Un générateur de devis pour les entreprises et les freelancers, permettant de créer des devis personnalisés et de les envoyer à leurs clients."
   },
   {
     title: "Eny Fondation",
     description: "Association de soutien des orphelins et des enfants défavorisés",
     image: enyfondation,
-    tech: ["Wordpress"]
+    tech: ["Wordpress"],
+    year: "2020",
+    status: "En ligne",
+    githubUrl: "https://github.com/yourusername/eny-fondation",
+    liveUrl: "https://eny-fondation.com",
+    fullDescription: "Un site web pour une association de soutien des orphelins et des enfants défavorisés, permettant de collecter des dons et de sensibiliser le public à la cause."
   },
   {
     title: "Goflyfits",
     description: "Application de location de vetements d'evenement",
     image: goflyfits,
-    tech: ["Laravel", "Bootstrap", "Jquery"]
+    tech: ["Laravel", "Bootstrap", "Jquery"],
+    year: "2020",
+    status: "En ligne",
+    githubUrl: "https://github.com/yourusername/goflyfits",
+    liveUrl: "https://goflyfits.com",
+    fullDescription: "Une application de location de vêtements d'événement, permettant aux utilisateurs de louer des vêtements pour des événements spéciaux."
   },
 ];
 
 const experiences: Experience[] = [
-
-    {
-        date: "Novembre 2024 - à present",
-        title: "Développeur Frontend",
-        company: "ZEGUILD",
-        description: "Conception et maintenance des applications web pour les PME et les entreprises"
-      },
-      {
-        date: "Janvier 2024 - à present",
-        title: "Sofware Engineer",
-        company: "independant",
-        description: "Création des applications robustes et performantes avec des technologies frontend modernes"
-      },{
-        date: "Decembre 2024 - Janvier 2025",
-        title: "Responsable technique par interim",
-        company: "GECAM",
-        description: "Maintenance des materiels informatiques et logiciels de la Gecam"
-      },
-      {
-        date: "Janvier 2023 - Aout 2023",
-        title: "Développeur Laravel",
-        company: "K-SOFT",
-        description: "Création d'une Api de voyage et maintenance d'applications frontend et backend"
-      },
+  {
+    date: "Novembre 2024 - à present",
+    title: "Développeur Frontend",
+    company: "ZEGUILD",
+    description: "Conception et maintenance des applications web pour les PME et les entreprises"
+  },
+  {
+    date: "Janvier 2024 - à present",
+    title: "Sofware Engineer",
+    company: "independant",
+    description: "Création des applications robustes et performantes avec des technologies frontend modernes"
+  },
+  {
+    date: "Decembre 2024 - Janvier 2025",
+    title: "Responsable technique par interim",
+    company: "GECAM",
+    description: "Maintenance des materiels informatiques et logiciels de la Gecam"
+  },
+  {
+    date: "Janvier 2023 - Aout 2023",
+    title: "Développeur Laravel",
+    company: "K-SOFT",
+    description: "Création d'une Api de voyage et maintenance d'applications frontend et backend"
+  },
   {
     date: "Mars 2021 - Dec 2023",
     title: "Développeur Full Stack",
     company: "Stillforce technologies",
     description: "Developpeur Full Stack et Responsable des projets en equipe"
   },
-  
-  
-  
-  
 ];
 
 const Homepage = () => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   return (
     <div className="min-h-screen overflow-hidden bg-gradient-to-br from-[#0F0F0F] via-[#1A1A1A] to-[#2D1F3D]">
       {/* Hero Section */}
@@ -241,19 +309,25 @@ const Homepage = () => {
                 value="4+" 
                 icon={FaDatabase}
               />
-              
             </div>
             
+            <motion.a
+              href="https://github.com/level237"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex  items-center gap-2 px-6 py-3 mt-20 text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:opacity-90 transition-opacity"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaGithub size={20} />
+              Voir mon GitHub
+            </motion.a>
           </motion.div>
-          
-          <div>
-            
-          </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-[#1A1A1A]/30 backdrop-blur-sm" >
+      <section id="projects" className="py-20 bg-[#1A1A1A]/30 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Mes Projets</h2>
           <Swiper
@@ -271,25 +345,109 @@ const Homepage = () => {
           >
             {projects.map((project, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-gray-800 bg-opacity-50 rounded-xl shadow-xl overflow-hidden border border-purple-500/20 backdrop-blur-sm">
+                <motion.div 
+                  className="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden backdrop-blur-sm border border-purple-500/20"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={() => setSelectedProject(project)}
+                >
                   <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2 text-gray-200">{project.title}</h3>
-                    <p className="text-gray-400 mb-4 truncate">{project.description}</p>
+                    <h3 className="text-xl font-semibold text-gray-200 mb-2">{project.title}</h3>
+                    <p className="text-gray-400 mb-4">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech, i) => (
-                        <span key={i} className="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">
+                      {project.tech.slice(0, 3).map((tech, techIndex) => (
+                        <span key={techIndex} className="px-3 py-1 text-sm bg-purple-500/20 rounded-full text-purple-300">
                           {tech}
                         </span>
                       ))}
+                      {project.tech.length > 3 && (
+                        <span className="px-3 py-1 text-sm bg-purple-500/20 rounded-full text-purple-300">
+                          +{project.tech.length - 3}
+                        </span>
+                      )}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
       </section>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <Modal isOpen={!!selectedProject} onClose={() => setSelectedProject(null)}>
+            <div className="relative">
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute -right-2 -top-2 p-2 text-gray-400 hover:text-white"
+              >
+                ✕
+              </button>
+              <img 
+                src={selectedProject.image} 
+                alt={selectedProject.title} 
+                className="w-full h-48 object-cover rounded-lg mb-4" 
+              />
+              <h3 className="text-2xl font-bold text-gray-200 mb-2">{selectedProject.title}</h3>
+              <div className="flex gap-3 mb-4">
+                <span className={`px-3 py-1 rounded-full text-sm ${
+                  selectedProject.status === "En ligne" 
+                    ? "bg-green-500/20 text-green-300"
+                    : selectedProject.status === "En maintenance"
+                    ? "bg-yellow-500/20 text-yellow-300"
+                    : "bg-red-500/20 text-red-300"
+                }`}>
+                  {selectedProject.status}
+                </span>
+                <span className="px-3 py-1 bg-purple-500/20 rounded-full text-purple-300 text-sm">
+                  {selectedProject.year}
+                </span>
+              </div>
+              <p className="text-gray-300 mb-6">{selectedProject.fullDescription || selectedProject.description}</p>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-gray-200 mb-2">Technologies utilisées</h4>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.tech.map((tech, index) => (
+                    <span key={index} className="px-3 py-1 text-sm bg-purple-500/20 rounded-full text-purple-300">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex gap-4">
+                {selectedProject.githubUrl && (
+                  <motion.a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaGithub size={20} />
+                    Voir le code
+                  </motion.a>
+                )}
+                {selectedProject.liveUrl && (
+                  <motion.a
+                    href={selectedProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-white"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaCode size={20} />
+                    Voir le projet
+                  </motion.a>
+                )}
+              </div>
+            </div>
+          </Modal>
+        )}
+      </AnimatePresence>
 
       {/* Experience Section */}
       <section id="experience" className="py-20 bg-[#1A1A1A]/20 backdrop-blur-sm">
