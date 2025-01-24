@@ -5,56 +5,58 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../styles/swiper.css';
-
+import fecascrab from "../assets/fecascrab.png"
+import akevas from "../assets/akevas.png"
+import breteuil from "../assets/breteuil.png"
+import hide from "../assets/hide.png"
+import sharaco from "../assets/sharaco.png"
+import enyfondation from "../assets/enyfondation.png"
+import goflyfits from "../assets/goflyfits.png"
 const projects = [
   {
-    title: "E-commerce Platform",
-    description: "Une plateforme e-commerce complète avec panier et paiement",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React", "Node.js", "MongoDB", "Stripe"]
+    title: "FecaScrab",
+    description: "Plateforme officielle de la fédération camerounaise de scrabble",
+    image: fecascrab,
+    tech: ["React Js", "Node.js", "Typescript"]
   },
   {
-    title: "Task Manager",
-    description: "Application de gestion de tâches avec fonctionnalités collaboratives",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React", "TypeScript", "Firebase"]
+    title: "Akevas",
+    description: "Marketplace des boutiques en ligne",
+    image: akevas,
+    tech: ["Laravel", "React Js", "Typescript"]
   },
   {
-    title: "Portfolio v1",
-    description: "Premier portfolio personnel avec animations et design moderne",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React", "Framer Motion", "Tailwind CSS"]
+    title: "Hide",
+    description: "Social Network for hidden people",
+    image: hide,
+    tech: ["Next Js", "React Js", "Mongo DB"]
   },
   {
-    title: "Weather App",
-    description: "Application météo avec géolocalisation et prévisions sur 7 jours",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React", "OpenWeather API", "Styled Components"]
+    title: "Breteuil dentaire",
+    description: "Site web vitrine d'un cabinet dentaire",
+    image: breteuil,
+    tech: ["Laravel", "Bootstrap", "Jquery"]
+  },
+  
+  {
+    title: "Sharaco",
+    description: "Generateur de devis pour les entreprises et les frelancers",
+    image: sharaco,
+    tech: ["Larave Api", "React Js", "Mysql"]
   },
   {
-    title: "Blog Platform",
-    description: "Plateforme de blog avec système de gestion de contenu",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["Next.js", "Prisma", "PostgreSQL"]
+    title: "Eny Fondation",
+    description: "Association de soutien des orphelins et des enfants défavorisés",
+    image: enyfondation,
+    tech: ["Wordpress"]
   },
   {
-    title: "Chat Application",
-    description: "Application de chat en temps réel avec salles de discussion",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React", "Socket.io", "Express"]
-  },
-  {
-    title: "Movie Database",
-    description: "Application de recherche et de recommandation de films",
-    image: "https://via.placeholder.com/400x300",
+    title: "Goflyfits",
+    description: "Application de location de vetements d'evenement",
+    image: goflyfits,
     tech: ["React", "TMDB API", "Redux"]
   },
-  {
-    title: "Fitness Tracker",
-    description: "Application de suivi d'exercices et de nutrition",
-    image: "https://via.placeholder.com/400x300",
-    tech: ["React Native", "GraphQL", "Node.js"]
-  }
+
 ];
 
 const Homepage = () => {
@@ -103,7 +105,7 @@ const Homepage = () => {
                   <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
                   <div className="p-6">
                     <h3 className="text-xl font-semibold mb-2 text-gray-200">{project.title}</h3>
-                    <p className="text-gray-400 mb-4">{project.description}</p>
+                    <p className="text-gray-400 mb-4 truncate">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech, i) => (
                         <span key={i} className="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">
@@ -127,6 +129,11 @@ const Homepage = () => {
             <div className="relative pl-8 border-l-2 border-purple-500">
               <div className="mb-12 relative">
                 <div className="absolute -left-10 w-4 h-4 bg-purple-500 rounded-full"></div>
+                <div className="bg-gray-800 mb-12 bg-opacity-50 p-6 rounded-lg shadow-xl border border-purple-500/20 backdrop-blur-sm">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-200">Développeur Full Stack</h3>
+                  <p className="text-gray-400 mb-2">Entreprise XYZ • 2023 - Présent</p>
+                  <p className="text-gray-300">Description de vos responsabilités et réalisations...</p>
+                </div>
                 <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-xl border border-purple-500/20 backdrop-blur-sm">
                   <h3 className="text-xl font-semibold mb-2 text-gray-200">Développeur Full Stack</h3>
                   <p className="text-gray-400 mb-2">Entreprise XYZ • 2023 - Présent</p>
@@ -134,7 +141,9 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
+            
           </div>
+          
         </div>
       </section>
 
