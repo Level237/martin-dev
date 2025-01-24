@@ -152,7 +152,7 @@ const projects: Project[] = [
     title: "FecaScrab",
     description: "Plateforme officielle de la fédération camerounaise de scrabble",
     image: fecascrab,
-    tech: ["React Js", "Node.js", "Typescript", "MongoDB", "Express", "Redux", "TailwindCSS"],
+    tech: ["React Js", "Node.js", "Typescript", "Zustand", "TailwindCSS"],
     year: "2023",
     status: "En ligne",
     githubUrl: "https://github.com/yourusername/fecascrab",
