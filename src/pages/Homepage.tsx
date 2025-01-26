@@ -265,7 +265,7 @@ const Homepage = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-[#0F0F0F] via-[#1A1A1A] to-[#2D1F3D]">
+    <div className="min-h-screen bg-gradient-to-br from-[#0F0F0F] via-[#1A1A1A] to-[#2D1F3D] overflow-hidden dark:bg-gradient-to-br dark:from-[#0F0F0F] dark:via-[#1A1A1A] dark:to-[#2D1F3D]">
       {/* Hero Section */}
       <section id="hero" className="min-h-screen mt-16 relative flex items-center justify-center px-4 sm:px-6 lg:px-8">
         {/* Floating Icons */}

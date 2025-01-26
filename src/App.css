@@ -1,5 +1,2 @@
 @import "tailwindcss";
 
-html {
-    @apply dark; /* Force le mode sombre pour tout le site */
-  }
